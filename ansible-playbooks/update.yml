@@ -19,4 +19,4 @@
       shell: "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower --run-once"
       register: shell_output
       changed_when: shell_output.stderr_lines|length > 1
-    - debug: var=shell_output.stderr_lines
+    #- debug: var=shell_output
