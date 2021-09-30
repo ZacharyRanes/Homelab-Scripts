@@ -1,0 +1,20 @@
+version: "2.1"
+services:
+  plex:
+    image: ghcr.io/linuxserver/plex
+    container_name: plex
+    network_mode: host
+    devices:
+      - /dev/dri:/dev/dri
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - VERSION=docker
+
+    volumes:
+      - /home/rain/plex:/config
+      - /mnt/media/_Plex-Backup:/backup
+      - /mnt/media/Anime-Movies:/anime-movies:ro
+      - /mnt/media/Anime-Shows:/anime-shows:ro
+      - /mnt/media/Movies:/movies:ro
+    restart: unless-stopped
