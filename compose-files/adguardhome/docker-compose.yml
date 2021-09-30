@@ -1,0 +1,17 @@
+version: "2.1"
+services:
+  adguardhome:
+    image: adguard/adguardhome
+    container_name: adguardhome
+    network_mode: host
+    volumes:
+      - adguardhome_work:/opt/adguardhome/work
+      - adguardhome_conf:/opt/adguardhome/conf
+    restart: unless-stopped
+volumes:
+  adguardhome_work:
+    external: true
+    name: adguardhome_work
+  adguardhome_conf:
+    external: true
+    name: adguardhome_conf
