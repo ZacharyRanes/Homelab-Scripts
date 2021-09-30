@@ -3,13 +3,12 @@
   hosts: apt
   become: yes
   tasks:
-  - name: "Updating Machines that use apt"
+  - name: "Updating machines that use apt"
     apt:
       update_cache: true
       upgrade: dist
-      cache_valid_time: 3600
-      force_apt_get: true
-
+      #cache_valid_time: 3600
+      #force_apt_get: true
 
 - name: "Update Docker Containers"
   hosts: docker
@@ -18,6 +17,6 @@
   tasks:
     - name: "Running watchtower container"
       shell: "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower --run-once"
-      register: shell_output
-      changed_when: shell_output.stderr_lines|length > 1
+      register: output
+      changed_when: output.stderr_lines|length > 1
     #- debug: var=shell_output
