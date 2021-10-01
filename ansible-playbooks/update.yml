@@ -3,14 +3,14 @@
   hosts: all
   become: yes
   tasks:
-  - name: "Updating Debian/Ubuntu machines"
-    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
-    apt:
-      update_cache: yes
-      upgrade: dist
-      autoremove: yes
-      #purge: yes
-      #force_apt_get: true
+    - name: "Updating Debian/Ubuntu machines"
+      when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+      apt:
+        update_cache: yes
+        upgrade: full
+        autoclean: yes
+        #purge: yes
+        #force_apt_get: true
 
 - name: "Update Containers"
   hosts: docker
