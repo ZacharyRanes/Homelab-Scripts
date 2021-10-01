@@ -1,19 +1,21 @@
 ---
 - name: "Update Machines"
-  hosts: apt
+  hosts: all
   become: yes
   tasks:
-  - name: "Updating machines that use apt"
+  - name: "Updating Debian/Ubuntu machines"
+    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
     apt:
-      update_cache: true
+      update_cache: yes
       upgrade: dist
-      #cache_valid_time: 3600
+      autoremove: yes
+      #purge: yes
       #force_apt_get: true
 
-- name: "Update Docker Containers"
+- name: "Update Containers"
   hosts: docker
   become: yes
-  gather_facts: no #docker is a subset of apt so don't need to do this twice
+  gather_facts: no #all the docker machines are Debian/Ubuntu
   tasks:
     - name: "Running watchtower container"
       shell: "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower --run-once"
