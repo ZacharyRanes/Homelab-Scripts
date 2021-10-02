@@ -3,21 +3,19 @@
   hosts: all
   become: yes
   tasks:
-    - name: "Updating Debian/Ubuntu machines"
+    - name: "Updating Debian/Ubuntu Machines"
       when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
       apt:
         update_cache: yes
         upgrade: full
         autoclean: yes
-        #purge: yes
-        #force_apt_get: true
+      #purge: yes
 
 - name: "Update Containers"
   hosts: docker
   become: yes
-  gather_facts: no #all the docker machines are Debian/Ubuntu
   tasks:
-    - name: "Running watchtower container"
+    - name: "Running Watchtower Container"
       shell: "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock containrrr/watchtower --run-once"
       register: output
       changed_when: output.stderr_lines|length > 1
