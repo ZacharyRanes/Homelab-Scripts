@@ -1,0 +1,1 @@
+sudo openvpn --config "<path to file>/<file>.ovpn" --auth-user-pass /etc/openvpn/auth.txt
