@@ -7,7 +7,7 @@ services:
     hostname: 'linux-box1.local'
     environment:
       GITLAB_OMNIBUS_CONFIG: |
-        external_url 'http://linux-box1.local:8443'
+        external_url 'https://linux-box1.local:8443'
         gitlab_rails['gitlab_shell_ssh_port'] = 2222
     ports:
       - '8443:8443'
