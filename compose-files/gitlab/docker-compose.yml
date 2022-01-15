@@ -1,18 +1,19 @@
 version: '3.6'
 services:
   web:
+    shm_size: '256m'
     image: 'gitlab/gitlab-ee:latest'
-    restart: always
-    hostname: 'gitlab.example.com'
+    container_name: gitlab
+    hostname: 'linux-box1.local'
     environment:
       GITLAB_OMNIBUS_CONFIG: |
-        external_url 'http://gitlab.example.com:8443'
+        external_url 'http://linux-box1.local:8443'
         gitlab_rails['gitlab_shell_ssh_port'] = 2222
     ports:
       - '8443:8443'
       - '2222:22'
     volumes:
-      - '/mnt/media/gitlab/config:/etc/gitlab'
-      - '/mnt/media/gitlab/logs:/var/log/gitlab'
-      - '/mnt/media/gitlab/data:/var/opt/gitlab'
-    shm_size: '256m'
+      - '/mnt/media/_Gitlab/config:/etc/gitlab'
+      - '/mnt/media/_Gitlab/logs:/var/log/gitlab'
+      - '/mnt/media/_Gitlab/data:/var/opt/gitlab'
+    restart: unless-stopped
