@@ -17,4 +17,5 @@ services:
       - /mnt/media/Anime-Movies:/anime-movies:ro
       - /mnt/media/Anime-Shows:/anime-shows:ro
       - /mnt/media/Movies:/movies:ro
+      - /mnt/media/TV-Shows:/tv-shows:ro
     restart: unless-stopped
